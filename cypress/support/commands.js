@@ -24,3 +24,20 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import "cypress-file-upload";
+
+Cypress.Commands.add("visitweb", () => {
+  cy.visit("https://admin.pkh.dojobox.id/");
+});
+
+Cypress.Commands.add("login", () => {
+  cy.visit("https://admin.pkh.dojobox.id/");
+  cy.get("#input-email", { force: true })
+    .type("e@dojobox.id")
+    .should("have.value", "e@dojobox.id");
+
+  cy.get("#input-password", { force: true })
+    .type("admin")
+    .should("have.value", "admin");
+  cy.wait(2000);
+  cy.contains("Login").click();
+});
